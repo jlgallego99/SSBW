@@ -9,3 +9,12 @@ services:
     
     ports:
       - 8000:8000
+
+  mongo:
+    image: mongo:4.2
+    
+    ports: 
+      - 27017:27017
+      
+    volumes:
+      - ./datos_db:/data/db
