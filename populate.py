@@ -4,12 +4,16 @@ from mongoengine import connect
 
 connect('ssbw', host='mongo')
 
+def downloadImage(filename):
+    response = requests.get("https://thispersondoesnotexist.com/image", headers={'User-Agent': 'My User Agent 1.0'}).content
+    with open(filename, 'wb') as f:
+        f.write(response)
+
 # Add ten fake users
 users = []
 r = requests.get("https://fakerapi.it/api/v1/persons?_quantity=10")
 for user in r.json()["data"]:
     u = Users()
-    #u.id = user["id"]
     u.firstName = user["firstname"]
     u.lastName = user["lastname"]
     u.email = user["email"]
@@ -17,6 +21,11 @@ for user in r.json()["data"]:
     u.birthday = user["birthday"]
     u.gender = user["gender"]
     u.website = user["website"]
+
+    # Fake user photo
+    photoName = "./img/image" + str(user["id"]) + ".jpg" 
+    downloadImage(photoName)
+    u.image = photoName
     
     a = Address()
     a.street = user["address"]["street"]
