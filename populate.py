@@ -35,6 +35,7 @@ for user in r.json()["data"]:
     a.zipcode = user["address"]["zipcode"]
     a.country = user["address"]["country"]
     a.countryCode = user["address"]["county_code"]
+    a.location = (user["address"]["latitude"], user["address"]["longitude"])
     u.address = a
 
     users.append(u)
