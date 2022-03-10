@@ -1,5 +1,5 @@
 import requests
-from models import *
+from fake_persons.models import *
 from mongoengine import connect
 
 connect('ssbw', host='mongo')
