@@ -1,25 +1,28 @@
 {% extends "base.html" %}
 
 {% block body %}
-<body>
-    <div class="mui-panel" style="text-align: center;">
-        <h1>Query fake persons!</h1>
-    </div>
+<div class="mui-container">
+    <form class="mui-form">
+        <legend>Create a new person</legend>
+        <div class="mui-textfield">
+            <input type="text" placeholder="Name">
+        </div>
 
-    <div class="mui-container">
-        <form class="mui-form">
-            <legend>Title</legend>
-            <div class="mui-textfield">
-                <input type="text" placeholder="Input 1">
-            </div>
-            <div class="mui-textfield">
-                <input type="text" placeholder="Input 2">
-            </div>
-            <div class="mui-textfield">
-                <textarea placeholder="Textarea"></textarea>
-            </div>
-            <button type="submit" class="mui-btn mui-btn--raised">Submit</button>
-        </form>
-    </div>
-</body>
+        <button type="submit" class="mui-btn mui-btn--raised">Submit</button>
+    </form>
+
+    <div class="mui-divider" style="margin-top: 3%; margin-bottom: 3%; padding: 0.1%;"></div>
+
+    <table class="mui-table mui--text-center">
+        <tbody>
+            {% for person in persons %}
+            <tr>
+                <td><a href="" class="mui-panel mui-btn mui-btn--flat" style="width: 80%;">{{ person.firstName }} {{ person.lastName }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+</div>
 {% endblock %}
