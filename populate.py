@@ -9,11 +9,11 @@ def downloadImage(filename):
     with open(filename, 'wb') as f:
         f.write(response)
 
-# Add ten fake users
-users = []
+# Add ten fake persons
+persons = []
 r = requests.get("https://fakerapi.it/api/v1/persons?_quantity=10")
 for user in r.json()["data"]:
-    u = Users()
+    u = Person()
     u.firstName = user["firstname"]
     u.lastName = user["lastname"]
     u.email = user["email"]
@@ -38,6 +38,6 @@ for user in r.json()["data"]:
     a.location = (user["address"]["latitude"], user["address"]["longitude"])
     u.address = a
 
-    users.append(u)
+    persons.append(u)
 
-Users.objects.insert(users)
+Person.objects.insert(persons)

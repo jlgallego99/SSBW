@@ -14,7 +14,7 @@ class Address(EmbeddedDocument):
     countryCode = StringField(max_length=2, required=False)
     location = GeoPointField(required=False)
 
-class Users(Document):
+class Person(Document):
     firstName = StringField(max_length=50, required=True)
     lastName = StringField(max_length=50, required=True)
     email = EmailField(required=True)
