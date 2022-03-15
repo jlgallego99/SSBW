@@ -23,7 +23,7 @@ for user in r.json()["data"]:
     u.website = user["website"]
 
     # Fake user photo
-    photoName = "./img/image" + str(user["id"]) + ".jpg" 
+    photoName = "./fake_persons/static/img/image" + str(user["id"]) + ".jpg" 
     downloadImage(photoName)
     u.image = photoName
     

@@ -17,7 +17,7 @@
         <tbody>
             {% for person in persons %}
             <tr>
-                <td><a href="" class="mui-panel mui-btn mui-btn--flat" style="width: 80%;">{{ person.firstName }} {{ person.lastName }}</a></td>
+                <td><a href="{% url 'person_detail' pk=person.pk %}" class="mui-panel mui-btn mui-btn--flat" style="width: 80%;">{{ person.firstName }} {{ person.lastName }}</a></td>
             </tr>
             {% endfor %}
         </tbody>

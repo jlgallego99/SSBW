@@ -8,5 +8,6 @@ def index(request):
     persons = Person.objects.all()
     return render(request, 'fake_persons/index.html', {'persons': persons})
 
-def person(request):
-    return render(request, 'fake_persons/person.html', {})
+def person_detail(request, pk):
+    p = Person.objects.get(pk=pk)
+    return render(request, 'fake_persons/person.html', {'person': p})
