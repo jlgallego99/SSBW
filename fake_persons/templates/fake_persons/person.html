@@ -1,5 +1,25 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block body %}
-
+<div class="mui-container">
+    <div class="mui-container-fluid mui-panel" style="width: 90%;">
+        <div class="mui-row mui--align-middle">
+            <div class="mui-col-md-4">
+                <img src="{% static 'img/image1.jpg' %}" style="height: 100%; width: 100%;">
+            </div>
+            <div class="mui-col-md-8">
+                <div class="mui--text-display2">{{ person.firstName }} {{ person.lastName }} ({{ person.gender }})</div>  
+            </div>
+            <div class="mui-col-md-3 mui--text-headline">{{ person.email }}</div>
+            <div class="mui-col-md-8"><div class="mui-divider"></div></div>
+            <div class="mui-col-md-8"><div class="mui-divider"></div></div>
+            <div class="mui-col-md-3 mui--text-headline mui-col-md-offset-1">{{ person.phone }}</div>
+            <div class="mui-col-md-8"><div class="mui-divider"></div></div>
+            <div class="mui-col-md-8 mui--text-headline">{{ person.address.street }} {{ person.address.streetName }} {{ person.address.buildingNumber }}</div>
+            <div class="mui-col-md-8"><div class="mui-divider"></div></div>
+            <div class="mui-col-md-8 mui--text-headline">{{ person.address.city }} {{ person.address.zipcode }} ({{ person.address.country }} - {{ person.address.countryCode }})</div>
+        </div>
+    </div>
+</div>
 {% endblock %}
