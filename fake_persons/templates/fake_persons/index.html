@@ -2,22 +2,16 @@
 
 {% block body %}
 <div class="mui-container">
-    <form class="mui-form">
-        <legend>Create a new person</legend>
-        <div class="mui-textfield">
-            <input type="text" placeholder="Name">
-        </div>
-
-        <button type="submit" class="mui-btn mui-btn--raised">Submit</button>
-    </form>
-
-    <div class="mui-divider" style="margin-top: 3%; margin-bottom: 3%; padding: 0.1%;"></div>
+    <div id="content-wrapper" class="mui--text-center">
+        <a href="{% url 'person_new' %}" class="mui-btn mui-btn--primary" style="width: 40%;">Create Person</a>
+    </div>
 
     <table class="mui-table mui--text-center">
         <tbody>
             {% for person in persons %}
             <tr>
-                <td><a href="{% url 'person_detail' pk=person.pk %}" class="mui-panel mui-btn mui-btn--flat" style="width: 80%;">{{ person.firstName }} {{ person.lastName }}</a></td>
+                <td><a href="{% url 'person_detail' pk=person.pk %}" class="mui-panel mui-btn mui-btn--flat"
+                        style="width: 80%;">{{ person.firstName }} {{ person.lastName }}</a></td>
             </tr>
             {% endfor %}
         </tbody>

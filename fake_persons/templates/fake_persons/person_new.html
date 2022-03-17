@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="mui-container">
+    <h2>Create a new person</h2>
+    <form action="{% url 'index' %}" method="POST" class="mui-form">
+        {% csrf_token %}
+        <div class="mui-textfield">
+            <input type="text" name="firstName" placeholder="First name">
+        </div>
+        <div class="mui-textfield">
+            <input type="text" name="lastName" placeholder="Last name">
+        </div>
+        <div class="mui-textfield">
+            <input type="text" name="gender" placeholder="Gender">
+        </div>
+        <div class="mui-textfield">
+            <input type="email" name="email" placeholder="Email">
+        </div>
+        <button type="submit" class="mui-btn mui-btn--raised">Create</button>
+    </form>
+</div>
+{% endblock %}
