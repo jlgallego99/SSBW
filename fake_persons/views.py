@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from .models import Person
+from .models import Person, Address
 from mongoengine import connect
 from .forms import PersonForm
 
@@ -10,7 +10,25 @@ def index(request):
         f = PersonForm(request.POST)
         if f.is_valid():
             p = f.cleaned_data
-            Person.objects.create(firstName=p["firstName"], lastName=p["lastName"], email=p["email"], gender=p["gender"])
+
+            u = Person()
+            u.firstName = p["firstName"]
+            u.lastName = p["lastName"]
+            u.email = p["email"]
+            u.phone = p["phone"]
+            u.gender = p["gender"]
+
+            a = Address()
+            a.street = p["street"]
+            a.streetName = p["streetName"]
+            a.buildingNumber = p["buildingNumber"]
+            a.city = p["city"]
+            a.zipcode = p["zipcode"]
+            a.country = p["country"]
+            a.countryCode = p["countryCode"]
+            u.address = a
+
+            u.save()
 
     persons = Person.objects.all()
     return render(request, 'fake_persons/index.html', {'persons': persons})
