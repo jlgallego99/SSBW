@@ -21,6 +21,16 @@
                 <div class="mui-divider"></div>
             </div>
             <div class="mui-col-md-8 mui--text-headline">{{ person.address.city }} {{ person.address.zipcode }} ({{ person.address.country }} - {{ person.address.countryCode }})</div>
+            <div class="mui--align-bottom">
+                <div class="mui-col-md-8">
+                    <a href=""><img src="{% static 'img/edit.png' %}" style="height: 5%; width: 5%;"></a>
+                    
+                    <form action="{% url 'person_delete' person.pk %}" method="POST" class="mui-form">
+                        {% csrf_token %}
+                        <input type="image" src="{% static 'img/delete.png' %}" alt="Delete Person"/>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

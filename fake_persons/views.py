@@ -40,3 +40,11 @@ def person_detail(request, pk):
 def person_new(request):
     f = PersonForm()
     return render(request, 'fake_persons/person_new.html', {'form': f})
+
+def person_delete(request, pk):
+    if request.method == "POST":
+        p = Person.objects.get(pk=pk)
+        p.delete()
+
+    persons = Person.objects.all()
+    return render(request, 'fake_persons/index.html', {'persons': persons})
