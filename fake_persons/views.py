@@ -48,3 +48,33 @@ def person_delete(request, pk):
 
     persons = Person.objects.all()
     return render(request, 'fake_persons/index.html', {'persons': persons})
+
+def person_edit(request, pk):
+    person = Person.objects.get(pk=pk)
+    f = PersonForm()
+    
+    if request.method == "GET":
+        return render(request, 'fake_persons/person_edit.html', {'form': f, 'person': person})
+    elif request.method == "POST":
+        f = PersonForm(request.POST)
+        if f.is_valid():
+            p = f.cleaned_data
+
+            person.update(set__firstName=p["firstName"])
+            person.update(set__lastName=p["lastName"])
+            person.update(set__email=p["email"])
+            person.update(set__phone=p["phone"])
+            person.update(set__gender=p["gender"])
+
+            a = Address()
+            a.street = p["street"]
+            a.streetName = p["streetName"]
+            a.buildingNumber = p["buildingNumber"]
+            a.city = p["city"]
+            a.zipcode = p["zipcode"]
+            a.country = p["country"]
+            a.countryCode = p["countryCode"]
+            person.update(set__address=a)
+
+        person = Person.objects.get(pk=pk)
+        return render(request, 'fake_persons/person.html', {'person': person})

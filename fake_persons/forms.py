@@ -11,6 +11,6 @@ class PersonForm(forms.Form):
     streetName = forms.CharField(max_length=50)
     buildingNumber = forms.IntegerField()
     city = forms.CharField(max_length=50)
-    zipcode = forms.IntegerField()
+    zipcode = forms.CharField()
     country = forms.CharField(max_length=50)
     countryCode = forms.CharField(max_length=2)

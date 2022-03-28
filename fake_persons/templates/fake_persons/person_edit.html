@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="mui-container">
+    <h1>Editing person: {{ person.firstName }} {{ person.lastName }}</h1>
+    <form action="{% url 'person_edit' person.pk %}" method="POST" class="mui-form">
+        {% csrf_token %}
+        <legend>Personal Information</legend>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="firstName" value="{{ person.firstName }}">
+            <label>First name</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="lastName" value="{{ person.lastName }}">
+            <label>Last name</label>
+        </div>
+
+        <div class="mui-select">
+            <select name="gender">
+                <option>male</option>
+                <option>female</option>
+            </select>
+            <label>Gender</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="email" name="email" value="{{ person.email }}">
+            <label>Email</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="number" name="phone" value="{{ person.phone }}">
+            <label>Phone number</label>
+        </div>
+
+        <legend>Address</legend>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="street" value="{{ person.address.street }}">
+            <label>Street</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="streetName" value="{{ person.address.streetName }}">
+            <label>Street name</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="number" name="buildingNumber" value="{{ person.address.buildingNumber }}">
+            <label>Building number</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="city" value="{{ person.address.city }}">
+            <label>City</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="number" name="zipcode" value="{{ person.address.zipcode }}">
+            <label>Zipcode</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="country" value="{{ person.address.country }}">
+            <label>Country</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="countryCode" value="{{ person.address.countryCode }}">
+            <label>Country code</label>
+        </div>
+
+        <button type="submit" class="mui-btn mui-btn--raised">Edit</button>
+    </form>
+</div>
+{% endblock %}
