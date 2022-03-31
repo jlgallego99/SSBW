@@ -1,11 +1,17 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block body %}
 <div class="mui-container">
-    <h1>Editing person: {{ person.firstName }} {{ person.lastName }}</h1>
-    <form action="{% url 'person_edit' person.pk %}" method="POST" class="mui-form">
+    <div class="mui-panel">
+        <h1>Editing person: {{ person.firstName }} {{ person.lastName }}</h1>
+        <img src="{% static person.image %}" style="height: 20em; width: 20em;">
+    </div>
+    <form action="{% url 'person_edit' person.pk %}" method="POST" class="mui-form" enctype="multipart/form-data">
         {% csrf_token %}
         <legend>Personal Information</legend>
+
+        <input type="file" name="image">
 
         <div class="mui-textfield mui-textfield--float-label">
             <input type="text" name="firstName" value="{{ person.firstName }}">

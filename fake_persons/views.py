@@ -3,6 +3,7 @@ from .models import Person, Address
 from mongoengine import connect
 from .forms import PersonForm
 from django.core.files.storage import default_storage
+import os
 
 connect('ssbw', host='mongo')
 
@@ -66,8 +67,8 @@ def person_edit(request, pk):
     if request.method == "GET":
         return render(request, 'fake_persons/person_edit.html', {'form': f, 'person': person})
     elif request.method == "POST":
-        f = PersonForm(request.POST)
-
+        f = PersonForm(request.POST, request.FILES)
+        print(f)
         if f.is_valid():
             p = f.cleaned_data
 
@@ -76,6 +77,14 @@ def person_edit(request, pk):
             person.update(set__email=p["email"])
             person.update(set__phone=p["phone"])
             person.update(set__gender=p["gender"])
+
+            # Delete old image
+            os.remove("fake_persons/static/" + person["image"])
+
+            # Update new image
+            img = request.FILES.get('image', False)
+            person.update(set__image="img/" + img.name)
+            default_storage.save("fake_persons/static/img/" + img.name, img)
 
             a = Address()
             a.street = p["street"]
