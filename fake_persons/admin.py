@@ -1,2 +1,2 @@
 from django.contrib import admin
-from .models import Users, Address
+from .models import Person, Address

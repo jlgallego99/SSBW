@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="mui-container">
+    <h1>Create a new person</h1>
+    <form action="{% url 'index' %}" method="POST" class="mui-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <legend>Personal Information</legend>
+
+        <input type="file" name="image">
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="firstName" placeholder="First name">
+            <label>First name</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="lastName" placeholder="Last name">
+            <label>Last name</label>
+        </div>
+
+        <div class="mui-select">
+            <select name="gender">
+                <option>male</option>
+                <option>female</option>
+            </select>
+            <label>Gender</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="email" name="email" placeholder="Email">
+            <label>Email</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="number" name="phone" placeholder="Phone number">
+            <label>Phone number</label>
+        </div>
+
+        <legend>Address</legend>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="street" placeholder="Street">
+            <label>Street</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="streetName" placeholder="Street name">
+            <label>Street name</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="number" name="buildingNumber" placeholder="Building number">
+            <label>Building number</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="city" placeholder="City">
+            <label>City</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="number" name="zipcode" placeholder="Zip code">
+            <label>Zip code</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="country" placeholder="Country">
+            <label>Country</label>
+        </div>
+
+        <div class="mui-textfield mui-textfield--float-label">
+            <input type="text" name="countryCode" placeholder="Country code">
+            <label>Country code</label>
+        </div>
+
+        <button type="submit" class="mui-btn mui-btn--raised">Create</button>
+    </form>
+</div>
+{% endblock %}

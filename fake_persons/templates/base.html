@@ -8,9 +8,40 @@
     <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
     <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
     <title>Fake Persons</title>
+    <style>
+        .fab {
+            margin: 0px;
+            top: auto;
+            right: 20px;
+            bottom: 20px;
+            left: auto;
+            position: fixed;
+            padding: 0
+        }
+
+        .clickable-row tr:hover {
+            background-color: blueviolet;
+        }
+
+        .clickable-row a {
+            text-decoration: none;
+            display: block;
+            padding: 16px;
+        }
+    </style>
 </head>
 
-{% block body %}
-{% endblock %}
+<body>
+    <div class="mui-appbar">
+        <table width="100%">
+            <tr style="vertical-align: middle;">
+                <td class="mui--appbar-height clickable-row" style="text-align: center;"><a href="{% url 'index' %}"
+                        class="mui--text-display2" style="color: black">Fake Persons</a></td>
+            </tr>
+        </table>
+    </div>
+    {% block body %}
+    {% endblock %}
+</body>
 
 </html>
