@@ -3,9 +3,11 @@
 {% block body %}
 <div class="mui-container">
     <h1>Create a new person</h1>
-    <form action="{% url 'index' %}" method="POST" class="mui-form">
+    <form action="{% url 'index' %}" method="POST" class="mui-form" enctype="multipart/form-data">
         {% csrf_token %}
         <legend>Personal Information</legend>
+
+        <input type="file" name="image">
 
         <div class="mui-textfield mui-textfield--float-label">
             <input type="text" name="firstName" placeholder="First name">

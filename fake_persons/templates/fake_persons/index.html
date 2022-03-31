@@ -8,6 +8,14 @@
 
     <table class="mui-table mui--text-center">
         <tbody>
+            {% if error %}
+            <tr>
+                <td class="mui-panel mui--bg-danger" style="text-align: center; font-size: large;">
+                    <h3>{{ error }}</h3>
+                </td>
+            </tr>
+            {% endif %}
+
             {% for person in persons %}
             <tr>
                 <td><a href="{% url 'person_detail' pk=person.pk %}" class="mui-panel mui-btn mui-btn--flat"

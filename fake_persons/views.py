@@ -2,12 +2,16 @@ from django.shortcuts import get_object_or_404, render
 from .models import Person, Address
 from mongoengine import connect
 from .forms import PersonForm
+from django.core.files.storage import default_storage
 
 connect('ssbw', host='mongo')
 
 def index(request):
+    error = ""
+
     if request.method == "POST":
-        f = PersonForm(request.POST)
+        f = PersonForm(request.POST, request.FILES)
+        print(f)
         if f.is_valid():
             p = f.cleaned_data
 
@@ -17,6 +21,10 @@ def index(request):
             u.email = p["email"]
             u.phone = p["phone"]
             u.gender = p["gender"]
+
+            img = request.FILES.get('image', False)
+            u.image = "img/" + img.name
+            default_storage.save("fake_persons/static/img/" + img.name, img)
 
             a = Address()
             a.street = p["street"]
@@ -29,9 +37,11 @@ def index(request):
             u.address = a
 
             u.save()
+        else:
+            error = "Couldn't create person"
 
     persons = Person.objects.all()
-    return render(request, 'fake_persons/index.html', {'persons': persons})
+    return render(request, 'fake_persons/index.html', {'persons': persons, 'error': error})
 
 def person_detail(request, pk):
     p = Person.objects.get(pk=pk)
@@ -57,6 +67,7 @@ def person_edit(request, pk):
         return render(request, 'fake_persons/person_edit.html', {'form': f, 'person': person})
     elif request.method == "POST":
         f = PersonForm(request.POST)
+
         if f.is_valid():
             p = f.cleaned_data
 
@@ -78,3 +89,8 @@ def person_edit(request, pk):
 
         person = Person.objects.get(pk=pk)
         return render(request, 'fake_persons/person.html', {'person': person})
+
+def download_image(f):
+    with open('img/' + str(f), 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
