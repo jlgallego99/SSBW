@@ -12,7 +12,6 @@ def index(request):
 
     if request.method == "POST":
         f = PersonForm(request.POST, request.FILES)
-        print(f)
         if f.is_valid():
             p = f.cleaned_data
 

@@ -46,7 +46,6 @@
                         <li class="mui--text-headline" style="color: aliceblue"">{{ user.username }}</li>
                         <li class="clickable-row"><a href="{% url 'logout' %}" class="mui--text-headline" style="color: aliceblue"><img src="{% static 'img/logout.png' %}" style="height: 1em; width:1em;"> Logout</a></li>
                         {% else %}
-                        <li class="clickable-row"><a href="{% url 'index' %}" class="mui--text-headline" style="color: aliceblue">Register</a></li>
                         <li class="clickable-row"><a href="{% url 'login' %}" class="mui--text-headline" style="color: aliceblue"><img src="{% static 'img/user.png' %}" style="height: 1em; width:1em;"> Login</a></li>
                         {% endif %}
                     </ul>

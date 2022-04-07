@@ -1,8 +1,6 @@
 from django.forms import URLField
 from mongoengine import Document, EmbeddedDocument
 from mongoengine.fields import EmbeddedDocumentField, StringField, EmailField, LongField, ListField, IntField, DateTimeField, GeoPointField
-from datetime import datetime
-from decouple import config
 
 class Address(EmbeddedDocument):
     street = StringField(max_length=50, required=True)
