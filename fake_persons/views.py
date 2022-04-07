@@ -3,6 +3,7 @@ from .models import Person, Address
 from mongoengine import connect
 from .forms import PersonForm
 from django.core.files.storage import default_storage
+from django.contrib.auth.decorators import login_required
 import os
 
 connect('ssbw', host='mongo')
@@ -43,14 +44,17 @@ def index(request):
     persons = Person.objects.all()
     return render(request, 'fake_persons/index.html', {'persons': persons, 'error': error})
 
+@login_required
 def person_detail(request, pk):
     p = Person.objects.get(pk=pk)
     return render(request, 'fake_persons/person.html', {'person': p})
 
+@login_required
 def person_new(request):
     f = PersonForm()
     return render(request, 'fake_persons/person_new.html', {'form': f})
 
+@login_required
 def person_delete(request, pk):
     if request.method == "POST":
         p = Person.objects.get(pk=pk)
@@ -59,6 +63,7 @@ def person_delete(request, pk):
     persons = Person.objects.all()
     return render(request, 'fake_persons/index.html', {'persons': persons})
 
+@login_required
 def person_edit(request, pk):
     person = Person.objects.get(pk=pk)
     f = PersonForm()
