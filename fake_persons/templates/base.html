@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html>
 
@@ -34,9 +36,20 @@
 <body>
     <div class="mui-appbar">
         <table width="100%">
-            <tr style="vertical-align: middle;">
-                <td class="mui--appbar-height clickable-row" style="text-align: center;"><a href="{% url 'index' %}"
-                        class="mui--text-display2" style="color: black">Fake Persons</a></td>
+            <tr class="mui--appbar-height" style="vertical-align: middle;">
+                <td class="clickable-row mui--text-left" style="text-align: center;"><a href="{% url 'index' %}"
+                        class="mui--text-display2" style="color: aliceblue">Fake Persons</a></td>
+
+                <td class="mui--text-right" style="text-align: center;">
+                    <ul class="mui-list--inline mui--text-body2">
+                        {% if user.is_authenticated %}
+                        <li class="mui--text-headline" style="color: aliceblue"">{{ user.username }}</li>
+                        <li class="clickable-row"><a href="{% url 'logout' %}" class="mui--text-headline" style="color: aliceblue"><img src="{% static 'img/logout.png' %}" style="height: 1em; width:1em;"> Logout</a></li>
+                        {% else %}
+                        <li class="clickable-row"><a href="{% url 'login' %}" class="mui--text-headline" style="color: aliceblue"><img src="{% static 'img/user.png' %}" style="height: 1em; width:1em;"> Login</a></li>
+                        {% endif %}
+                    </ul>
+                </td>
             </tr>
         </table>
     </div>

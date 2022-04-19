@@ -6,7 +6,7 @@ class PersonForm(forms.Form):
     email = forms.CharField(max_length=50, required=True)
     gender = forms.CharField(max_length=10, required=True)
     phone = forms.IntegerField(required=True)
-    image = forms.FileField(required=True)
+    image = forms.FileField(required=False)
     street = forms.CharField(max_length=50)
     streetName = forms.CharField(max_length=50)
     buildingNumber = forms.IntegerField()
