@@ -71,7 +71,7 @@ def person_new(request):
 def person_delete(request, pk):
     logger.info("Request: Delete person with id %s", pk)
     if request.method == "POST":
-        logger.info("Person with id ", pk, " deleted")
+        logger.info("Person with id %s deleted", pk)
         p = Person.objects.get(pk=pk)
 
         # Delete image file

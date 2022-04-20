@@ -1,6 +1,40 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block head %}
+<script>
+    function modalDeleteConfirmation() {
+        // initialize modal element
+        var modalEl = document.createElement("div");
+        modalEl.id = "modaldelete"
+        modalEl.style.width = "400px";
+        modalEl.style.height = "300px";
+        modalEl.style.margin = "100px auto";
+        modalEl.style.backgroundColor = "#fff";
+
+        var closeModalButton = document.createElement("button");
+        closeModalButton.innerHTML = "No, keep person";
+        closeModalButton.className = "mui-btn mui-btn--raised"
+        closeModalButton.id = "closemodalbutton"
+        modalEl.appendChild(closeModalButton);
+
+        var deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Yes, delete person";
+        deleteButton.className = "mui-btn mui-btn--raised mui-btn--danger"
+        deleteButton.id = "deletebutton"
+        modalEl.appendChild(deleteButton);
+
+        // show modal
+        mui.overlay("on", modalEl);
+
+        // close modal
+        $("#closemodalbutton").click(function () {
+            mui.overlay("off", modalEl);
+        });
+    }
+</script>
+{% endblock %}
+
 {% block body %}
 <div class="mui-container">
     <div class="mui-container-fluid mui-panel" style="width: 90%;">
@@ -16,7 +50,8 @@
             <div class="mui-col-md-8">
                 <div class="mui-divider"></div>
             </div>
-            <div class="mui-col-md-8 mui--text-headline">{{ person.address.street }} {{ person.address.streetName }} {{person.address.buildingNumber }}</div>
+            <div class="mui-col-md-8 mui--text-headline">{{ person.address.street }} {{ person.address.streetName }}
+                {{person.address.buildingNumber }}</div>
             <div class="mui-col-md-8">
                 <div class="mui-divider"></div>
             </div>
@@ -25,13 +60,17 @@
                 <div class="mui-col-md-8">
                     <form action="{% url 'person_edit' person.pk %}" method="GET" class="mui-form">
                         {% csrf_token %}
-                        <input type="image" src="{% static 'img/edit.png' %}" alt="Edit Person"/>
+                        <button class="iconbutton" type="submit" alt="Edit Person"><i class="fa-5x fa-pencil-square-o"
+                                aria-hidden="true"></i></button>
                     </form>
-                    
-                    <form action="{% url 'person_delete' person.pk %}" method="POST" class="mui-form">
+
+                    <button class="iconbutton" onclick="modalDeleteConfirmation()"><i class="fa-5x fa-trash"
+                            aria-hidden="true"></i></button>
+
+                    <!-- <form action="{% url 'person_delete' person.pk %}" method="POST" class="mui-form">
                         {% csrf_token %}
                         <input type="image" src="{% static 'img/delete.png' %}" alt="Delete Person"/>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </div>
