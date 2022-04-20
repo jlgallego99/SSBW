@@ -7,10 +7,27 @@
         // initialize modal element
         var modalEl = document.createElement("div");
         modalEl.id = "modaldelete"
-        modalEl.style.width = "25em";
-        modalEl.style.height = "25em";
+        modalEl.style.width = "40em";
+        modalEl.style.height = "22em";
         modalEl.style.margin = "10% auto";
         modalEl.style.backgroundColor = "#fff";
+        modalEl.style.display = "flex";
+        modalEl.style.flexDirection = "column";
+
+        var dangericon = document.createElement("div")
+        dangericon.style.display = "flex";
+        dangericon.style.alignItems = "center";
+        dangericon.style.justifyContent = "center";
+        dangericon.style.padding = "2em";
+        dangericon.innerHTML = "<i style=\"font-size: 50px\" class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>";
+        modalEl.appendChild(dangericon);
+
+        var modaltext = document.createElement("div")
+        modaltext.style.display = "flex";
+        modaltext.style.alignItems = "center";
+        modaltext.style.justifyContent = "center";
+        modaltext.innerHTML = "<h3>Are you sure you want to delete this person?</h3>";
+        modalEl.appendChild(modaltext);
 
         var closeModalButton = document.createElement("button");
         closeModalButton.innerHTML = "No, keep person";
