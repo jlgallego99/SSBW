@@ -4,6 +4,7 @@ from mongoengine import connect
 from .forms import PersonForm
 from django.core.files.storage import default_storage
 from django.contrib.auth.decorators import login_required
+from django.http.response import JsonResponse
 import logging
 import os
 
@@ -71,16 +72,18 @@ def person_new(request):
 def person_delete(request, pk):
     logger.info("Request: Delete person with id %s", pk)
     if request.method == "POST":
-        logger.info("Person with id %s deleted", pk)
         p = Person.objects.get(pk=pk)
 
         # Delete image file
-        os.remove("fake_persons/static/" + p["image"])
+        if p["image"] and os.path.exists("fake_persons/static/" + p["image"]):
+            os.remove("fake_persons/static/" + p["image"])
 
         p.delete()
 
-    persons = Person.objects.all()
-    return render(request, 'fake_persons/index.html', {'persons': persons})
+        logger.info("Person with id %s deleted", pk)
+        return JsonResponse({"success":True})
+    else:
+        return JsonResponse({"success":False})
 
 @login_required
 def person_edit(request, pk):

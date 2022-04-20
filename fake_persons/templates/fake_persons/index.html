@@ -1,5 +1,74 @@
 {% extends "base.html" %}
 
+{% block head %}
+<script>
+    function modalDeleteConfirmation(pk) {        
+        // initialize modal element
+        var modalEl = document.createElement("div");
+        modalEl.id = "modaldelete"
+        modalEl.style.width = "40em";
+        modalEl.style.height = "22em";
+        modalEl.style.margin = "10% auto";
+        modalEl.style.backgroundColor = "#fff";
+        modalEl.style.display = "flex";
+        modalEl.style.flexDirection = "column";
+
+        var dangericon = document.createElement("div")
+        dangericon.style.display = "flex";
+        dangericon.style.alignItems = "center";
+        dangericon.style.justifyContent = "center";
+        dangericon.style.padding = "2em";
+        dangericon.innerHTML = "<i style=\"font-size: 50px\" class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i>";
+        modalEl.appendChild(dangericon);
+
+        var modaltext = document.createElement("div")
+        modaltext.style.display = "flex";
+        modaltext.style.alignItems = "center";
+        modaltext.style.justifyContent = "center";
+        modaltext.innerHTML = "<h3>Are you sure you want to delete this person?</h3>";
+        modalEl.appendChild(modaltext);
+
+        var closeModalButton = document.createElement("button");
+        closeModalButton.innerHTML = "No, keep person";
+        closeModalButton.className = "mui-btn mui-btn--raised"
+        closeModalButton.id = "closemodalbutton"
+        closeModalButton.style.margin = "1em";
+        modalEl.appendChild(closeModalButton);
+
+        var deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Yes, delete person";
+        deleteButton.className = "mui-btn mui-btn--raised mui-btn--danger"
+        deleteButton.id = "deletebutton"
+        deleteButton.style.margin = "1em";
+        modalEl.appendChild(deleteButton);
+
+        // show modal
+        mui.overlay("on", modalEl);
+
+        // delete person with modal button
+        $("#deletebutton").click(function() {
+            $.ajax({
+                url: "http://localhost:8000/delete/" + pk,
+                type: "post",
+                data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+                success: function(data) {
+                    // close modal and delete row when server responds success
+                    if (data["success"]) {
+                        mui.overlay("off", modalEl);
+                        $("#person" + pk).remove();   
+                    }
+                }
+            });
+        });
+
+        // close modal
+        $("#closemodalbutton").click(function () {
+            mui.overlay("off", modalEl);
+        });
+    }
+</script>
+{% endblock %}
+
 {% block body %}
 <div class="mui-container">
     {% if user.is_authenticated %}
@@ -18,9 +87,11 @@
             {% endif %}
 
             {% for person in persons %}
-            <tr>
-                <td><a href="{% url 'person_detail' pk=person.pk %}" class="mui-panel mui-btn mui-btn--flat"
-                        style="width: 80%;">{{ person.firstName }} {{ person.lastName }}</a></td>
+            <tr id="person{{ person.pk }}">
+                <td>
+                    <a href="{% url 'person_detail' pk=person.pk %}" class="mui-panel mui-btn mui-btn--flat" style="width: 80%;">{{ person.firstName }} {{ person.lastName }}</a>
+                    <button class="iconbutton" onclick="modalDeleteConfirmation('{{ person.pk|slugify }}')" value="aaa"><i style="color: red" class="fa-2x fa-times" aria-hidden="true"></i></button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
