@@ -7,21 +7,23 @@
         // initialize modal element
         var modalEl = document.createElement("div");
         modalEl.id = "modaldelete"
-        modalEl.style.width = "400px";
-        modalEl.style.height = "300px";
-        modalEl.style.margin = "100px auto";
+        modalEl.style.width = "25em";
+        modalEl.style.height = "25em";
+        modalEl.style.margin = "10% auto";
         modalEl.style.backgroundColor = "#fff";
 
         var closeModalButton = document.createElement("button");
         closeModalButton.innerHTML = "No, keep person";
         closeModalButton.className = "mui-btn mui-btn--raised"
         closeModalButton.id = "closemodalbutton"
+        closeModalButton.style.margin = "1em";
         modalEl.appendChild(closeModalButton);
 
         var deleteButton = document.createElement("button");
         deleteButton.innerHTML = "Yes, delete person";
         deleteButton.className = "mui-btn mui-btn--raised mui-btn--danger"
         deleteButton.id = "deletebutton"
+        deleteButton.style.margin = "1em";
         modalEl.appendChild(deleteButton);
 
         // show modal
