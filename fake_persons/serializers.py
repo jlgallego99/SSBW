@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 class PersonSerializer(serializers.Serializer):
-    id = serializers.CharField(required=True)
+    id = serializers.CharField(required=False)
     firstName = serializers.CharField(max_length=50, required=True)
     lastName = serializers.CharField(max_length=50, required=True)
     email = serializers.EmailField(required=True)

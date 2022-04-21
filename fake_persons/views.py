@@ -29,8 +29,16 @@ def api_person_list(request):
         data = JSONParser().parse(request)
         serializer = PersonSerializer(data=data)
         if serializer.is_valid():
-            logger.debug(serializer.data)
-            # serializer.save()
+            p = serializer.data
+
+            u = Person()
+            u.firstName = p["firstName"]
+            u.lastName = p["lastName"]
+            u.email = p["email"]
+            u.gender = p["gender"]
+            u.image = p["image"]
+            u.save()
+
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
@@ -49,10 +57,18 @@ def api_person_detail(request, pk):
     elif request.method == 'PUT':
         logger.info("API: PUT Person detail")
         data = JSONParser().parse(request)
-        serializer = PersonSerializer(person, data=data)
+        serializer = PersonSerializer(data=data)
         if serializer.is_valid():
-            logger.debug(serializer.data)
-            # serializer.save()
+            p = serializer.data
+
+            person.update(set__firstName=p["firstName"])
+            person.update(set__lastName=p["lastName"])
+            person.update(set__email=p["email"])
+            person.update(set__image=p["image"])
+            person.update(set__gender=p["gender"])
+
+            person = Person.objects.get(pk=pk)
+            serializer = PersonSerializer(person)
             return JsonResponse(serializer.data)
         return JsonResponse(serializer.errors, status=400)
     elif request.method == 'DELETE':
