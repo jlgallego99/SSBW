@@ -8,8 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Fake Persons</title>
+
     <style>
         .fab {
             margin: 0px;
@@ -30,7 +33,19 @@
             display: block;
             padding: 16px;
         }
+
+        .iconbutton {
+            background-color: transparent;
+            background-repeat: no-repeat;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+        }
     </style>
+
+    {% block head %}
+    {% endblock %}
 </head>
 
 <body>
@@ -44,9 +59,9 @@
                     <ul class="mui-list--inline mui--text-body2">
                         {% if user.is_authenticated %}
                         <li class="mui--text-headline" style="color: aliceblue"">{{ user.username }}</li>
-                        <li class="clickable-row"><a href="{% url 'logout' %}" class="mui--text-headline" style="color: aliceblue"><img src="{% static 'img/logout.png' %}" style="height: 1em; width:1em;"> Logout</a></li>
+                        <li class="clickable-row"><a href="{% url 'logout' %}" class="mui--text-headline" style="color: aliceblue"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
                         {% else %}
-                        <li class="clickable-row"><a href="{% url 'login' %}" class="mui--text-headline" style="color: aliceblue"><img src="{% static 'img/user.png' %}" style="height: 1em; width:1em;"> Login</a></li>
+                        <li class="clickable-row"><a href="{% url 'login' %}" class="mui--text-headline" style="color: aliceblue"><i class="fa fa-user" aria-hidden="true"></i> Login</a></li>
                         {% endif %}
                     </ul>
                 </td>

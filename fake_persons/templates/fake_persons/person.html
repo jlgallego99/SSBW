@@ -16,7 +16,8 @@
             <div class="mui-col-md-8">
                 <div class="mui-divider"></div>
             </div>
-            <div class="mui-col-md-8 mui--text-headline">{{ person.address.street }} {{ person.address.streetName }} {{person.address.buildingNumber }}</div>
+            <div class="mui-col-md-8 mui--text-headline">{{ person.address.street }} {{ person.address.streetName }}
+                {{person.address.buildingNumber }}</div>
             <div class="mui-col-md-8">
                 <div class="mui-divider"></div>
             </div>
@@ -25,12 +26,7 @@
                 <div class="mui-col-md-8">
                     <form action="{% url 'person_edit' person.pk %}" method="GET" class="mui-form">
                         {% csrf_token %}
-                        <input type="image" src="{% static 'img/edit.png' %}" alt="Edit Person"/>
-                    </form>
-                    
-                    <form action="{% url 'person_delete' person.pk %}" method="POST" class="mui-form">
-                        {% csrf_token %}
-                        <input type="image" src="{% static 'img/delete.png' %}" alt="Delete Person"/>
+                        <button class="iconbutton" type="submit" alt="Edit Person"><i class="fa-5x fa-pencil-square-o" aria-hidden="true"></i></button>
                     </form>
                 </div>
             </div>
