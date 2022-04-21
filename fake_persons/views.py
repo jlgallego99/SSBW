@@ -1,16 +1,80 @@
 from django.shortcuts import get_object_or_404, render
+
+from .serializers import PersonSerializer
 from .models import Person, Address
 from mongoengine import connect
 from .forms import PersonForm
+from .serializers import PersonSerializer
 from django.core.files.storage import default_storage
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
+from rest_framework.parsers import JSONParser
 import logging
 import os
 
 connect('ssbw', host='mongo')
 
 logger = logging.getLogger(__name__)
+
+@csrf_exempt
+def api_person_list(request):
+    if request.method == 'GET':
+        logger.info("API: GET Person list")
+        persons = Person.objects.all()
+        serializer = PersonSerializer(persons, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        logger.info("API: POST Person")
+        data = JSONParser().parse(request)
+        serializer = PersonSerializer(data=data)
+        if serializer.is_valid():
+            p = serializer.data
+
+            u = Person()
+            u.firstName = p["firstName"]
+            u.lastName = p["lastName"]
+            u.email = p["email"]
+            u.gender = p["gender"]
+            u.image = p["image"]
+            u.save()
+
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+@csrf_exempt
+def api_person_detail(request, pk):
+    try:
+        person = Person.objects.get(pk=pk)
+    except Person.DoesNotExist:
+        logger.error("Person not found")
+        return JsonResponse({"error": "Person not found"}, status=404)
+
+    if request.method == 'GET':
+        logger.info("API: GET Person detail")
+        serializer = PersonSerializer(person)
+        return JsonResponse(serializer.data)
+    elif request.method == 'PUT':
+        logger.info("API: PUT Person detail")
+        data = JSONParser().parse(request)
+        serializer = PersonSerializer(data=data)
+        if serializer.is_valid():
+            p = serializer.data
+
+            person.update(set__firstName=p["firstName"])
+            person.update(set__lastName=p["lastName"])
+            person.update(set__email=p["email"])
+            person.update(set__image=p["image"])
+            person.update(set__gender=p["gender"])
+
+            person = Person.objects.get(pk=pk)
+            serializer = PersonSerializer(person)
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+    elif request.method == 'DELETE':
+        logger.info("API: DELETE Person")
+        person.delete()
+        return JsonResponse({'deleted': True})
 
 def index(request):
     logger.info("Request: home page")
