@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 
-from SSBW.fake_persons.serializers import PersonSerializer
+from .serializers import PersonSerializer
 from .models import Person, Address
 from mongoengine import connect
 from .forms import PersonForm

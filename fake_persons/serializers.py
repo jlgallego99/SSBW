@@ -1,6 +1,4 @@
-from random import choices
 from rest_framework import serializers
-from .models import Person
 
 class PersonSerializer(serializers.Serializer):
     id = serializers.CharField(required=True)
