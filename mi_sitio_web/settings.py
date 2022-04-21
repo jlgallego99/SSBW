@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'fake_persons',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
