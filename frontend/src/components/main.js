@@ -7,16 +7,8 @@ import Link from '@mui/material/Link';
 import Table from './table'
 
 function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+    return { name, calories, fat, carbs, protein, status: "No" };
 }
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 function Copyright() {
     return (
@@ -32,6 +24,25 @@ function Copyright() {
 }
 
 export default function Main() {
+    const [rows, setRows] = React.useState([
+        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+        createData('Eclair', 262, 16.0, 24, 6.0),
+        createData('Cupcake', 305, 3.7, 67, 4.3),
+        createData('Gingerbread', 356, 16.0, 49, 3.9),
+    ]);
+
+    function handleChange(event, i) {
+        let nuevas_rows = [...rows];
+        let sta = "No";
+        if (event.target.checked) {
+            sta = "Si";
+        }
+    
+        nuevas_rows[i].status = sta;
+        setRows(nuevas_rows);
+    }
+
     return (
         <Box
             sx={{
@@ -45,7 +56,7 @@ export default function Main() {
                 <Typography variant="h2" component="h1" gutterBottom>
                     Ejemplo React y MUI
                 </Typography>
-                <Table rows={rows}/>
+                <Table rows={rows} handleChange={handleChange}/>
             </Container>
             <Box
                 component="footer"
