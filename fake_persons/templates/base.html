@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 
 <!doctype html>
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Fake Persons</title>
+    <title>{% translate 'Personas Falsas' %}</title>
 
     <style>
         .fab {
@@ -53,7 +54,7 @@
         <table width="100%">
             <tr class="mui--appbar-height" style="vertical-align: middle;">
                 <td class="clickable-row mui--text-left" style="text-align: center;"><a href="{% url 'index' %}"
-                        class="mui--text-display2" style="color: aliceblue">Fake Persons</a></td>
+                        class="mui--text-display2" style="color: aliceblue">{% translate 'Personas Falsas' %}</a></td>
 
                 <td class="mui--text-right" style="text-align: center;">
                     <ul class="mui-list--inline mui--text-body2">

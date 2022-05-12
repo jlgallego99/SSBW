@@ -3,3 +3,4 @@ python-decouple
 mongoengine
 requests
 djangorestframework
+python-gettext
