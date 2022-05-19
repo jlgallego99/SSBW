@@ -1,20 +1,28 @@
 services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 80:80
+      - 443:443
+    # directorios para el archivo de configuración y archivos del static
+    volumes:
+      - ./conf:/etc/nginx/conf.d
+      - ./despliegue:/var/www/
+    depends_on:
+      - web
+
   web:
     build: .
-
-    command: python manage.py runserver 0.0.0.0:8000
-
+    command: gunicorn mi_sitio_web.wsgi:application --bind 0.0.0.0:8000
+    #command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
-    
     ports:
       - 8000:8000
 
   mongo:
     image: mongo:4.2
-    
-    ports: 
+    ports:
       - 27017:27017
-      
     volumes:
       - ./datos_db:/data/db
