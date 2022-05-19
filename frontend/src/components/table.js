@@ -6,47 +6,54 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import { useState, useEffect } from "react";
 
 export default function BasicTable(props) {
-    const { rows, handleChange } = props;
+    const [isLoading, setIsLoading] = useState(true);
+    const [persons, setPersons] = useState(null);
 
-    return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                        <TableCell align="right">Status</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row, index) => (
-                        <TableRow
-                            key={index}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
-                            <TableCell align="right">{row.carbs}</TableCell>
-                            <TableCell align="right">{row.protein}</TableCell>
-                            <TableCell align="right">{row.status}</TableCell>
-                            <TableCell align="right">
-                                <Switch onChange={(event)=>handleChange(event, index)} />
-                            </TableCell>
+    const fetchPersonList = () => {
+        setIsLoading(true);
+        fetch("http://localhost:80/app/api/person/")
+            .then((response) => response.json())
+            .then((p) => {
+                setPersons(p);
+                setIsLoading(false);
+            });
+    };
+    useEffect(fetchPersonList, []);
+
+    if (isLoading) {
+        return (
+            <>
+                <h1>Cargando...</h1>
+            </>
+        )
+    } else {
+        return (
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="right">First Name</TableCell>
+                            <TableCell align="right">Last Name</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
+                    </TableHead>
+                    <TableBody>
+                        {persons.map((person, index) => (
+                            <TableRow
+                                key={index}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="person">
+                                    {person.firstName}
+                                </TableCell>
+                                <TableCell align="right">{person.lastName}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        );
+    }
 }
