@@ -26,8 +26,7 @@ export default function BasicTable(props) {
     useEffect(fetchPersonList, []);
 
     const onClickPersona = (id) => {
-        console.log(id)
-        navigate(`/persona/${id}`);
+        navigate(`/persona/${id}`, {id: id});
     }
 
     if (isLoading) {

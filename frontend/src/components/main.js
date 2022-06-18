@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
-import Table from './table';
 import AppBar from './appbar';
 
 function createData(name, calories, fat, carbs, protein) {
