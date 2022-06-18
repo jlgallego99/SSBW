@@ -54,7 +54,7 @@ export default function Main() {
 
             <AppBar/>
             <CssBaseline />
-            <Table rows={rows} handleChange={handleChange}/>
+            
             <Box
                 component="footer"
                 sx={{

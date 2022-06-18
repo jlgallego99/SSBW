@@ -7,10 +7,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export default function BasicTable(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [persons, setPersons] = useState(null);
+    const navigate = useNavigate();
 
     const fetchPersonList = () => {
         setIsLoading(true);
@@ -25,6 +27,7 @@ export default function BasicTable(props) {
 
     const onClickPersona = (id) => {
         console.log(id)
+        navigate(`/persona/${id}`);
     }
 
     if (isLoading) {
