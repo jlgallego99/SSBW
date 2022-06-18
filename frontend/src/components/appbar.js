@@ -11,7 +11,7 @@ export default function ButtonAppBar() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
             <Toolbar>
-                <Link component={RouterLink} to="/" underline="none" variant="h6" color="inherit" sx={{ flexGrow: 1 }}>Personas Falsas</Link>
+                <Link component={RouterLink} to="/" underline="none" variant="h6" color="inherit" sx={{ flexGrow: 1, fontSize: 'xx-large' }}>Personas Falsas</Link>
                 <Button color="inherit">Login</Button>
             </Toolbar>
             </AppBar>

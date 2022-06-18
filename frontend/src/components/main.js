@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import AppBar from './appbar';
+import FabButton from './fab';
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein, status: "No" };
@@ -53,7 +54,7 @@ export default function Main() {
 
             <AppBar/>
             <CssBaseline />
-            
+            <FabButton />
             <Box
                 component="footer"
                 sx={{
