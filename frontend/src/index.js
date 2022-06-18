@@ -14,13 +14,13 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <><Main />
   <BrowserRouter>
+    <Main />
     <Routes>
       <Route path="/" element={<Table />} />
       <Route path="/persona/:id" element={<Persona />} />
     </Routes>
-  </BrowserRouter></>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

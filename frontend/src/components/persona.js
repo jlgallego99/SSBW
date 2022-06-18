@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function Persona() {
-    const { id } = useLocation();
+    const { id } = useParams();
 
     return (
         <Box>
