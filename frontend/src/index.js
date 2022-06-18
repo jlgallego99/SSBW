@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 //import App from './App';
 import Main from './components/main';
-import Perro from './components/perro';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,7 +15,6 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Main />} />
-      <Route path="perro" element={<Perro />} />
     </Routes>
   </BrowserRouter>
 );

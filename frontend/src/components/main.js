@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
-import Table from './table'
+import Table from './table';
+import AppBar from './appbar';
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein, status: "No" };
@@ -48,22 +49,21 @@ export default function Main() {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '100vh',
             }}
         >
+
+            <AppBar/>
             <CssBaseline />
-            <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="false">
-                <Typography variant="h2" component="h1" gutterBottom>
-                    Ejemplo React y MUI
-                </Typography>
-                <Table rows={rows} handleChange={handleChange}/>
-            </Container>
+            <Table rows={rows} handleChange={handleChange}/>
             <Box
                 component="footer"
                 sx={{
                     py: 3,
                     px: 2,
                     mt: 'auto',
+                    position: 'fixed',
+                    width: '100%',
+                    bottom: 0,
                     backgroundColor: (theme) =>
                         theme.palette.mode === 'light'
                             ? theme.palette.grey[200]

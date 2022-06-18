@@ -23,6 +23,10 @@ export default function BasicTable(props) {
     };
     useEffect(fetchPersonList, []);
 
+    const onClickPersona = (id) => {
+        console.log(id)
+    }
+
     if (isLoading) {
         return (
             <>
@@ -35,8 +39,10 @@ export default function BasicTable(props) {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell align="right">First Name</TableCell>
-                            <TableCell align="right">Last Name</TableCell>
+                            <TableCell align="center" sx={{ fontSize: 'x-large' }}><strong>First Name</strong></TableCell>
+                            <TableCell align="center" sx={{ fontSize: 'x-large' }}><strong>Last Name</strong></TableCell>
+                            <TableCell align="center" sx={{ fontSize: 'x-large' }}><strong>Email</strong></TableCell>
+                            <TableCell align="center" sx={{ fontSize: 'x-large' }}><strong>Phone</strong></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -44,11 +50,15 @@ export default function BasicTable(props) {
                             <TableRow
                                 key={index}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                onClick={() => onClickPersona(person.id)}
+                                hover={true}
                             >
-                                <TableCell component="th" scope="person">
+                                <TableCell align="center" component="th" scope="person">
                                     {person.firstName}
                                 </TableCell>
-                                <TableCell align="right">{person.lastName}</TableCell>
+                                <TableCell align="center">{person.lastName}</TableCell>
+                                <TableCell align="center">{person.email}</TableCell>
+                                <TableCell align="center">{person.phone}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
