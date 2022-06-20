@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Fab from '@mui/material/Fab';
 import { GrAdd } from 'react-icons/gr';
+import { useNavigate } from 'react-router-dom';
 
 const fabStyle = {
     position: 'fixed',
@@ -10,9 +11,11 @@ const fabStyle = {
 };
 
 export default function FabButton(props) {
+    const navigate = useNavigate();
+
     return (
-        <Fab sx={fabStyle} color="primary" aria-label="add">
-            <GrAdd sx={{ color: 'white' }} />         
+        <Fab sx={fabStyle} color="primary" aria-label="add" onClick={() => {navigate('/crear');}}>
+            <GrAdd />         
         </Fab>
     )
 }

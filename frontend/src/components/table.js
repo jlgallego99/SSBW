@@ -27,7 +27,9 @@ export default function BasicTable(props) {
     };
     useEffect(fetchPersonList, []);
 
-    const eliminarPersona = (id) => {
+    const eliminarPersona = (event, id) => {
+        event.stopPropagation()
+
         fetch("http://localhost:80/app/api/person/" + id, {
             method: "DELETE",
         })
@@ -78,7 +80,7 @@ export default function BasicTable(props) {
                                 <TableCell align="center">{person.email}</TableCell>
                                 <TableCell align="center">{person.phone}</TableCell>
                                 <TableCell align="left">
-                                    <IconButton color="error" component="span" onClick={() => eliminarPersona(person.id)} >
+                                    <IconButton color="error" component="span" onClick={(event) => eliminarPersona(event, person.id)} >
                                         <MdDelete />
                                     </IconButton>
                                 </TableCell>

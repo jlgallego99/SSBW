@@ -11,6 +11,7 @@ import Main from './components/main';
 import Persona from './components/persona';
 import Table from './components/table';
 import reportWebVitals from './reportWebVitals';
+import CrearPersona from './components/crear_persona';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,7 @@ root.render(
     <Routes>
       <Route path="/" element={<Table />} />
       <Route path="/persona/:id" element={<Persona />} />
+      <Route path="crear" element={<CrearPersona />} />
     </Routes>
   </BrowserRouter>
 );
