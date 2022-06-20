@@ -69,7 +69,7 @@ export default function BasicTable(props) {
                         {persons.map((person, index) => (
                             <TableRow
                                 key={index}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer' }}
                                 onClick={() => onClickPersona(person.id)}
                                 hover={true}
                             >
