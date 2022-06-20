@@ -1,12 +1,9 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Box from '@mui/material/Box';
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
 
@@ -14,14 +11,12 @@ export default function Persona() {
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [person, setPerson] = useState(null);
-    const navigate = useNavigate();
 
     const fetchPersonList = () => {
         setIsLoading(true);
         fetch("http://localhost:80/app/api/person/" + id)
             .then((response) => response.json())
             .then((p) => {
-                console.log(p);
                 setPerson(p);
                 setIsLoading(false);
             });
@@ -36,7 +31,7 @@ export default function Persona() {
         )
     } else {
         return (
-            <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10vh' }}>
                 <Card sx={{ margin: '5vh', width: "auto" }}>
                 <CardMedia
                     component="img"

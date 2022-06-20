@@ -3,9 +3,10 @@ import Fab from '@mui/material/Fab';
 import { GrAdd } from 'react-icons/gr';
 
 const fabStyle = {
-    position: 'absolute',
-    bottom: 16,
-    right: 16,
+    position: 'fixed',
+    right: 0,
+    bottom: '10vh',
+    marginRight: 2,
 };
 
 export default function FabButton(props) {
