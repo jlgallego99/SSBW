@@ -30,7 +30,7 @@ export default function Persona() {
             </>
         )
     } else {
-        var img = "http://localhost/" + person.image;
+        var img = "http://localhost/static/" + person.image;
 
         return (
             <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10vh' }}>
