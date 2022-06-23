@@ -2,11 +2,13 @@ import * as React from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { TextField, Box, Button, Select, MenuItem } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
 
 export default function CrearPersona() {
     const { control, handleSubmit } = useForm({
         reValidateMode: "onBlur"
     });
+    const [errorForm, setErrorForm] = useState(false);
 
     const navigate = useNavigate();
 
@@ -19,14 +21,12 @@ export default function CrearPersona() {
             },
             body: JSON.stringify(evt)
         })
-            .then((response) => response.json())
-            .then((r) => {
-                if (r.ok) {
-                    console.log("BIEN");
+            .then((response) => {
+                if (response.ok) {
+                    setErrorForm(false);
                     navigate("/");
                 } else {
-                    console.log("MAL");
-                    console.log(r);
+                    setErrorForm(true);
                 }
             })
     }
@@ -108,6 +108,7 @@ export default function CrearPersona() {
                     />
                 )}
             />
+            {errorForm && <p style={{ color: "red" }}>Error en el formulario</p>}
             <Button type="submit" id="imagenPersona" variant="contained" sx={{ margin: "2vh", marginTop: "5vh" }}>Submit</Button>
         </Box>
     );

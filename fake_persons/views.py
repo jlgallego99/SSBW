@@ -36,7 +36,11 @@ def api_person_list(request):
             u.lastName = p["lastName"]
             u.email = p["email"]
             u.gender = p["gender"]
-            u.image = p["image"]
+            u.phone = p["phone"]
+
+            if "image" in p:
+                u.image = p["image"]
+            
             u.save()
 
             return JsonResponse(serializer.data, status=201)
