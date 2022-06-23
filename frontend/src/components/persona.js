@@ -30,13 +30,15 @@ export default function Persona() {
             </>
         )
     } else {
+        var img = "http://localhost/" + person.image;
+
         return (
             <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10vh' }}>
                 <Card sx={{ margin: '5vh', width: "auto" }}>
                 <CardMedia
                     component="img"
-                    height="140"
-                    image="./public/logo512.png"
+                    height="300vh"
+                    image={img}
                     alt="Persona"
                 />
                 <CardContent sx={{  }}>

@@ -1,43 +1,21 @@
 import * as React from 'react';
 import { Controller, useForm } from "react-hook-form";
-import { TextField, Box, Button, Select, MenuItem, Input } from "@mui/material";
+import { TextField, Box, Button, Select, MenuItem } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import { FaImage } from 'react-icons/fa';
-import { useState } from 'react';
-
-var image = null;
 
 export default function CrearPersona() {
     const { control, handleSubmit } = useForm({
         reValidateMode: "onBlur"
     });
 
-    const [imageData, setImageData] = useState();
-    const [filename, setFilename] = useState();
     const navigate = useNavigate();
-
-    const handleFileUpload = (e) => {
-        if (!e.target.files) {
-            return;
-        }
-        const file = e.target.files[0];
-        const { name } = file;
-        setFilename(name);
-
-        const reader = new FileReader();
-        reader.onload = (evt) => {
-            const { result } = evt.target;
-            setImageData(result);
-        };
-        reader.readAsBinaryString(file);
-    };
 
     const handleOnSubmit = (evt) => {
         console.log(evt);
         fetch("http://localhost:80/app/api/person/", {
             method: "POST",
             headers: {
-                "Content-Type": "multipart/form-data"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(evt)
         })
@@ -45,7 +23,6 @@ export default function CrearPersona() {
             .then((r) => {
                 if (r.ok) {
                     console.log("BIEN");
-                    console.log(r);
                     navigate("/");
                 } else {
                     console.log("MAL");
@@ -129,14 +106,6 @@ export default function CrearPersona() {
                         variant="outlined"
                         label="Telefono"
                     />
-                )}
-            />
-            <Controller
-                name="image"
-                control={control}
-                defaultValue={""}
-                render={({ field }) => (
-                    <Input {...field} type="image" value="Subir" onChange={handleFileUpload} />
                 )}
             />
             <Button type="submit" id="imagenPersona" variant="contained" sx={{ margin: "2vh", marginTop: "5vh" }}>Submit</Button>
