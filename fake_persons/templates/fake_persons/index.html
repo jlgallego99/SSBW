@@ -48,7 +48,7 @@
         // delete person with modal button
         $("#deletebutton").click(function() {
             $.ajax({
-                url: "http://localhost:80/app/delete/" + pk,
+                url: "http://localhost:8000/app/delete/" + pk,
                 type: "post",
                 data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
                 success: function(data) {
