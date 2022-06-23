@@ -8,4 +8,4 @@ class PersonSerializer(serializers.Serializer):
     phone = serializers.CharField(max_length=50, required=False)
     birthday = serializers.DateTimeField(required=False)
     gender = serializers.ChoiceField(required=True, choices=['male', 'female'])
-    image = serializers.CharField()
+    image = serializers.CharField(required=False)

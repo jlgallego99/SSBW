@@ -36,10 +36,15 @@ def api_person_list(request):
             u.lastName = p["lastName"]
             u.email = p["email"]
             u.gender = p["gender"]
-            u.image = p["image"]
+            u.phone = p["phone"]
+
+            if "image" in p:
+                u.image = p["image"]
+            
             u.save()
 
             return JsonResponse(serializer.data, status=201)
+
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
@@ -114,6 +119,7 @@ def index(request):
 
             u.save()
         else:
+            print(f.errors)
             error = "Couldn't create person"
             logger.error("Invalid Person Form: %s", error)
 

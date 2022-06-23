@@ -6,7 +6,7 @@
     <div class="mui-container-fluid mui-panel" style="width: 90%;">
         <div class="mui-row mui--align-middle">
             <div class="mui-col-md-4">
-                <img src="{% static person.image %}" style="height: 100%; width: 100%;">
+                <img src="http://localhost/{{ person.image }}" style="height: 100%; width: 100%;">
             </div>
             <div class="mui-col-md-8">
                 <div class="mui--text-display2">{{ person.firstName }} {{ person.lastName }} ({{ person.gender }})</div>
@@ -26,7 +26,7 @@
                 <div class="mui-col-md-8">
                     <form action="{% url 'person_edit' person.pk %}" method="GET" class="mui-form">
                         {% csrf_token %}
-                        <button class="iconbutton" type="submit" alt="Edit Person"><i class="fa-5x fa-pencil-square-o" aria-hidden="true"></i></button>
+                        <button class="iconbutton" type="submit" alt="Edit Person"><i class="fa fa-5x fa-pencil-square-o" aria-hidden="true"></i></button>
                     </form>
                 </div>
             </div>

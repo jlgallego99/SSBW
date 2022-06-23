@@ -48,7 +48,7 @@
         // delete person with modal button
         $("#deletebutton").click(function() {
             $.ajax({
-                url: "http://localhost:8000/delete/" + pk,
+                url: "http://localhost/app/delete/" + pk,
                 type: "post",
                 data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
                 success: function(data) {
@@ -90,7 +90,7 @@
             <tr id="person{{ person.pk }}">
                 <td>
                     <a href="{% url 'person_detail' pk=person.pk %}" class="mui-panel mui-btn mui-btn--flat" style="width: 80%;">{{ person.firstName }} {{ person.lastName }}</a>
-                    <button class="iconbutton" onclick="modalDeleteConfirmation('{{ person.pk|slugify }}')" value="aaa"><i style="color: red" class="fa-2x fa-times" aria-hidden="true"></i></button>
+                    <button class="iconbutton" onclick="modalDeleteConfirmation('{{ person.pk|slugify }}')" value="aaa"><i style="color: red" class="fa fa-2x fa-times" aria-hidden="true"></i></button>
                 </td>
             </tr>
             {% endfor %}
